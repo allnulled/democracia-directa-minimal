@@ -1,0 +1,29 @@
+asigno window.PaginaDeVerSesion como un componente vue2 con nombre "PaginaDeVerSesion" con plantilla {
+  <div class="PaginaDeVerSesion Component">
+    <WinVentana titulo="🌐 Ver sesión">
+      <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:'/'},{texto: 'Ver sesión',link:false}]" />
+      <div class="padding_1">
+        <div class="etiqueta_de_formulario_1">
+          Token de sesión actual:
+        </div>
+        <textarea class="width_100" style="min-height: 70px;" :value="root.tokenDeSesion" disabled="true"></textarea>
+      </div>
+    </WinVentana>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      retorno {}.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método mounted donde {}.
+  }.
+}.

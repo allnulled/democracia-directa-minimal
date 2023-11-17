@@ -1,0 +1,60 @@
+asigno window.VisorDeDato como un componente vue2 con nombre "VisorDeDato" con plantilla {
+  <div class="VisorDeDato Component">
+    <div class="visor_de_dato">
+      <div class="item_de_campo" v-for="prop, propIndex in dato" v-bind:key="'campo-de-visor-de-dato-' + propIndex">
+        <span class="etiqueta_de_campo">{{ root.$utilidades.humanizarTexto(propIndex) }}:</span>
+        <span class="valor_de_campo">{{ prop }}</span>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+      propiedad tablaProp como {
+        propiedad type como String.
+        propiedad required como true.
+      }.
+      propiedad idProp como {
+        propiedad type como [String,Number].
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      retorno {
+        dato: undefined
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono obtenerDato donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/ConsultarDatos"
+          con método "POST"
+          con cuerpo {
+            tabla: this.tablaProp,
+            filtros: [
+              ["id", "=", this.idProp]
+            ]
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores {
+            hago this.root.gestionarError(error).
+          }.
+        si respuesta_1.data.data.datos.length es igual que 0 {
+          lanzo un nuevo Error("No se encontró ninguna instancia de «" + this.tablaProp + "» por el identificador proporcionado").
+        }.
+        asigno this.dato como respuesta_1.data.data.datos[0].
+      } en errores hago this.root.gestionarError(error).
+    }.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtenerDato().
+    }.
+  }.
+}.

@@ -1,0 +1,48 @@
+hago un hecho asíncrono donde {
+  creo utilidades como {}.
+  asigno utilidades.textosHumanizados como {
+    "Descripcion": "Descripción",
+    "Presentacion": "Presentación",
+    "Fecha de presentacion": "Fecha de presentación",
+    "Id": "ID",
+    "Id votacion": "ID de votación",
+    "Id problema": "ID de problema",
+    "Id solucion": "ID de solución",
+    "Id implementacion": "ID de implementación",
+    "Id usuario": "ID de usuario",
+    "Titulo": "Título"
+  }.
+  asigno utilidades.humanizarTexto como una función con (texto) donde {
+    creo variable salida como texto.
+    asigno salida como texto.replace(una nueva RegExp("[A-Z]", "g"), una función con (match) donde {
+      retorno "_" + match.toLowerCase().
+    }).
+    asigno salida como texto.replace(una nueva RegExp("_", "g"), " ").
+    asigno salida como salida.substr(0,1).toUpperCase() + salida.substr(1).
+    si utilidades.textosHumanizados contiene clave salida {
+      asigno salida como utilidades.textosHumanizados[salida].
+    }.
+    retorno salida.
+  }.
+  asigno utilidades.abreviarTexto como una función con (texto, longitud o en su defecto 50) donde {
+    si texto es tipo número retorno texto.
+    si texto es tipo objeto asigno texto como texto textualizado.
+    si texto es tipo indefinido asigno texto como "-".
+    si texto es igual que null asigno texto como "- (nulo)".
+    si texto es tipo texto {
+      si texto.length es mayor que longitud {
+        retorno texto.substr(0, longitud) + "...".
+      }.
+      retorno texto.
+    }.
+  }.
+  asigno utilidades.crearParametrosQuerystring como una función con (parametros) donde {
+    creo parametrosUrl como un nuevo URLSearchParams(parametros).
+    retorno parametrosUrl.toString().
+  }.
+  asigno window.DemocraciaDirectaMinimal_utilidades como utilidades.
+} en errores {
+  imprimo "Error al cargar utilidades:".
+  imprimo error.
+  lanzo error.
+}.

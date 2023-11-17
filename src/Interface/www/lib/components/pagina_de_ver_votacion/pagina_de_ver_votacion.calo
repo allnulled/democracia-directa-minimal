@@ -1,0 +1,71 @@
+asigno window.PaginaDeVerVotacion como un componente vue2 con nombre "PaginaDeVerVotacion" con plantilla {
+  <div class="PaginaDeVerVotacion Component">
+    <WinVentana titulo="🌐 Ver votación">
+      <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:'/'},{texto: 'Ver votaciones',link:'/VerVotaciones'},{texto: 'Ver votación',link:false}]" />
+      <VisorDeDato :root="root" tabla-prop="Votacion" :id-prop="this.$route.params.id_votacion" />
+      <div class="padding_1 padding_top_0 row">
+        <router-link class="col-6" :to="'/CrearProblema/' + $route.params.id_votacion">
+          <button class="width_100">Crear problema</button>
+        </router-link>
+        <router-link class="col-6" :to="'/VerProblemas?' + root.$utilidades.crearParametrosQuerystring(busqueda)">
+          <button class="width_100">Ver problemas</button>
+        </router-link>
+        <router-link class="col-6" :to="'/VerSoluciones?' + root.$utilidades.crearParametrosQuerystring(busqueda)">
+          <button class="width_100">Ver soluciones</button>
+        </router-link>
+        <router-link class="col-6" :to="'/VerImplementaciones?' + root.$utilidades.crearParametrosQuerystring(busqueda)">
+          <button class="width_100">Ver implementaciones</button>
+        </router-link>
+        <div class="col-12" v-if="esAdministrador">
+          <button class="width_100" v-on:click="() => progresarEstadoDeVotacion()">Progresar estado</button>
+        </div>
+      </div>
+    </WinVentana>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      debugo "PaginaDeVerVotacion.data".
+      retorno {
+        esAdministrador: false,
+        busqueda: {
+          filtros: [
+            ["id_votacion", "=", this.$route.params.id_votacion]
+          ] textualizado
+        }
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono progresarEstadoDeVotacion donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/ProgresarEstadoDeVotacion"
+          con método "POST"
+          con cuerpo {
+            id_votacion: parseInt(this.$route.params.id_votacion)
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores hago this.root.gestionarError(error).
+        imprimo respuesta_1.
+        imprimo respuesta_1.data.
+        hago this.$router.history.push("/VerVotaciones").
+      }.
+    }.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método asíncrono mounted donde {
+      asigno this.esAdministrador como this.root.permisos.reduce(una lambda con (salida, permiso) donde {
+        si permiso.nombre es igual que "permiso de administración" asigno salida como true.
+        retorno salida.
+      }, false).
+      hago this.$forceUpdate(true).
+    }.
+  }.
+}.

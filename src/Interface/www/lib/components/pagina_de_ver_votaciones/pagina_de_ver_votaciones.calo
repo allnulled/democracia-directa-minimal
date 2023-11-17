@@ -1,0 +1,51 @@
+asigno window.PaginaDeVerVotaciones como un componente vue2 con nombre "PaginaDeVerVotaciones" con plantilla {
+  <div class="PaginaDeVerVotaciones Component">
+    <WinVentana titulo="🌐 Ver votaciones">
+      <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:'/'},{texto: 'Ver votaciones',link:false}]" />
+      <div class="padding_1">
+        <ExploradorDeDatos ref="explorador"
+          :root="root"
+          tabla-prop="Votacion"
+          :filtros-prop="filtros"
+          :orden-prop="orden"
+          :pagina-prop="pagina"
+          :items-prop="items"
+          :al-clicar-prop="(componente, dato) => $router.history.push('/VerVotacion/' + dato.id)"
+        />
+        <div class="padding_top_1 row" v-if="esAdministrador">
+          <router-link class="col-12" :to="'/CrearVotacion'">
+            <button class="width_100">Crear votación</button>
+          </router-link>
+        </div>
+      </div>
+    </WinVentana>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      retorno {
+        esAdministrador: false,
+        filtros: [],
+        orden: [["id","DESC"]],
+        pagina: 1,
+        items: 20
+      }.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método asíncrono mounted donde {
+      asigno this.esAdministrador como this.root.permisos.reduce(una lambda con (salida, permiso) donde {
+        si permiso.nombre es igual que "permiso de administración" asigno salida como true.
+        retorno salida.
+      }, false).
+      hago this.$forceUpdate(true).
+    }.
+  }.
+}.

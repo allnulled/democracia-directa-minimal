@@ -1,0 +1,199 @@
+exporto como módulo es5 una función asíncrona donde {
+    creo variable authorization como undefined.
+    creo variable idVotacionCreada como undefined.
+    creo variable idProblemaCreado como undefined.
+    creo variable idSolucionCreada como undefined.
+    creo variable idImplementacionCreada como undefined.
+    creo variable idVotoInsertado como undefined.
+    creo variable esquemaDeDatos como undefined.
+    creo Login como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/Login"
+            con método "POST"
+            con cuerpo {
+                nombre: "admin",
+                contrasenya: "admin"
+            }
+            con cabeceras {}.
+        compruebo que respuesta.data.data.sesion.token es tipo texto.
+        asigno authorization como respuesta.data.data.sesion.token.
+        imprimo respuesta.data.data.mensaje.
+    }.
+    creo CrearVotacion como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/CrearVotacion"
+            con método "POST"
+            con cuerpo {
+                presentacion: "ok",
+                fecha_de_presentacion: "2023-05-01",
+                fecha_de_problemas: "2023-05-02",
+                fecha_de_soluciones: "2023-05-03",
+                fecha_de_implementaciones: "2023-05-04",
+                fecha_de_aplicaciones: "2023-05-05"
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        imprimo respuesta.data.data.mensaje.
+        compruebo que respuesta.data.data.mensaje es igual que "La votación fue insertada correctamente".
+        asigno idVotacionCreada como respuesta.data.data.id.
+    }.
+    creo ProgresarEstadoDeVotacion como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/ProgresarEstadoDeVotacion"
+            con método "POST"
+            con cuerpo {
+                id_votacion: idVotacionCreada
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+    }.
+    creo CrearProblema como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/CrearProblema"
+            con método "POST"
+            con cuerpo {
+                titulo: "Titulo del problema",
+                descripcion: "Descripcion del problema",
+                contenido: "Cotenido del problema",
+                id_votacion: idVotacionCreada
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+        asigno idProblemaCreado como respuesta.data.data.id.
+    }.
+    creo CrearSolucion como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/CrearSolucion"
+            con método "POST"
+            con cuerpo {
+                titulo: "Titulo de la solucion",
+                descripcion: "Descripcion de la solucion",
+                contenido: "Cotenido de la solucion",
+                id_votacion: idVotacionCreada,
+                id_problema: idProblemaCreado
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+        asigno idSolucionCreada como respuesta.data.data.id.
+    }.
+    creo CrearImplementacion como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/CrearImplementacion"
+            con método "POST"
+            con cuerpo {
+                titulo: "Titulo de la implementacion",
+                descripcion: "Descripcion de la implementacion",
+                contenido: "Cotenido de la implementacion",
+                id_votacion: idVotacionCreada,
+                id_problema: idProblemaCreado,
+                id_solucion: idSolucionCreada
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+        asigno idImplementacionCreada como respuesta.data.data.id.
+    }.
+    creo DarVoto como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/DarVoto"
+            con método "POST"
+            con cuerpo {
+                sentido: 0-1,
+                id_implementacion: idImplementacionCreada
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+        asigno idVotoInsertado como respuesta.data.data.id.
+    }.
+    creo ConsultarVoto como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/ConsultarDatos"
+            con método "POST"
+            con cuerpo {
+                tabla: "Voto",
+                filtros: []
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        compruebo que respuesta.data.data.datos es tipo lista.
+        compruebo que respuesta.data.data.datos[0] es tipo objeto.
+        imprimo respuesta.data.data.mensaje.
+    }.
+    creo RetirarVoto como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/RetirarVoto"
+            con método "POST"
+            con cuerpo {
+                id_voto: idVotoInsertado
+            }
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+    }.
+    creo MostrarEsquema como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/MostrarEsquema"
+            con método "POST"
+            con cuerpo {}
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+        asigno esquemaDeDatos como respuesta.data.data.esquema.
+        compruebo que esquemaDeDatos es tipo lista.
+    }.
+    creo Logout como una función asíncrona donde {
+        creo respuesta como asíncronamente una petición http
+            con url "http://127.0.0.1:5054/Logout"
+            con método "POST"
+            con cuerpo {}
+            con cabeceras { authorization }
+            en errores {
+                imprimo error.response.data.error.
+            }.
+        compruebo que respuesta.data.data.mensaje es tipo texto.
+        imprimo respuesta.data.data.mensaje.
+    }.
+    hago asíncronamente Login().
+    hago asíncronamente CrearVotacion().
+    hago asíncronamente ProgresarEstadoDeVotacion().
+    hago asíncronamente CrearProblema().
+    hago asíncronamente ProgresarEstadoDeVotacion().
+    hago asíncronamente CrearSolucion().
+    hago asíncronamente ProgresarEstadoDeVotacion().
+    hago asíncronamente CrearImplementacion().
+    hago asíncronamente DarVoto().
+    hago asíncronamente ConsultarVoto().
+    hago asíncronamente RetirarVoto().
+    hago asíncronamente MostrarEsquema().
+    hago asíncronamente Logout().
+} en errores imprimo error.response.data.error.

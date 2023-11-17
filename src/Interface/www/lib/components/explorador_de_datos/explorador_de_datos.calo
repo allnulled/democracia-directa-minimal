@@ -1,0 +1,177 @@
+asigno window.ExploradorDeDatos como un componente vue2 con nombre "ExploradorDeDatos" con plantilla {
+  <div class="ExploradorDeDatos Component">
+    <div class="visor_de_tabla_1" v-if="datos && datos.length">
+      <table class="tabla_de_paginacion">
+        <tr>
+          <td>
+            <button class="min_width_auto" v-on:click="() => irAPaginaPrimera()" :disabled="pagina === 1"> «« </button>
+          </td>
+          <td>
+            <button class="min_width_auto" v-on:click="() => irAPaginaAnterior()" :disabled="pagina === 1"> « </button>
+          </td>
+          <td class="width_100 text_align_center">
+            <span>Página </span>
+            <span>{{ pagina }}</span>
+          </td>
+          <td>
+            <button class="min_width_auto" v-on:click="() => irAPaginaSiguiente()"> » </button>
+          </td>
+        </tr>
+      </table>
+      <table class="tabla">
+        <thead>
+          <tr>
+            <template v-for="prop, propIndex in datos[0]">
+              <th :style="propIndex === 'id' ? 'width: 1%;' : ''" v-bind:key="'tabla-de-datos-fila-cabecera-' + propIndex">
+                <div class="">{{ root.$utilidades.humanizarTexto(propIndex) }}</div>
+              </th>
+            </template>
+          </tr>
+        </thead>
+        <tbody v-for="dato, datoIndex in datos" v-bind:key="'tabla-de-datos-fila-' + datoIndex">
+          <tr>
+            <td v-for="prop, propIndex in dato" v-bind:key="'tabla-de-datos-fila-' + datoIndex + '-celda-' + propIndex">
+              <div v-if="propIndex === 'id'">
+                <div v-if="modo === 'navegador'">
+                  <button class="boton_de_tabla_1" v-on:click="() => alClicar(this, dato, datoIndex, prop, propIndex)">
+                    Ir a {{ prop }}
+                  </button>
+                </div>
+                <div v-if="modo === 'selector'">
+                  <button class="boton_de_tabla_1" v-on:click="() => this.seleccionarItem(dato)">
+                    {{ seleccion === dato ? "x" : "" }}
+                  </button>
+                  <span>{{ root.$utilidades.abreviarTexto(prop, 50) }}</span>
+                </div>
+                <div v-if="modo === 'selector múltiple'">
+                  <button class="boton_de_tabla_1" v-on:click="() => seleccionarItem(dato)">
+                    {{ seleccion.indexOf(dato) !== -1 ? "x" : "" }}
+                  </button>
+                  <span>{{ root.$utilidades.abreviarTexto(prop, 50) }}</span>
+                </div>
+              </div>
+              <div v-else>
+              {{ root.$utilidades.abreviarTexto(prop, 50) }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div v-else>
+      No se encontraron instancias de «{{ tabla }}» con los parámetros actuales.
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+      propiedad tablaProp como {
+        propiedad type como String.
+        propiedad required como true.
+      }.
+      propiedad filtrosProp como {
+        propiedad type como Array.
+        propiedad default como una lambda donde retorno [].
+      }.
+      propiedad ordenProp como {
+        propiedad type como Array.
+        propiedad default como una lambda donde retorno [["id","DESC"]].
+      }.
+      propiedad paginaProp como {
+        propiedad type como Number.
+        propiedad default como 1.
+      }.
+      propiedad itemsProp como {
+        propiedad type como Number.
+        propiedad default como 20.
+      }.
+      propiedad modoProp como {
+        propiedad type como String.
+        propiedad default como "navegador". ### "navegador" | "selector" | "selector múltiple"
+      }.
+      propiedad alClicarProp como {
+        propiedad type como Function.
+        propiedad default como una función.
+      }.
+    }.
+    método data donde {
+      retorno {
+        seleccion: undefined,
+        datos: undefined,
+        tabla: this.tablaProp,
+        filtros: this.filtrosProp,
+        orden: this.ordenProp,
+        pagina: this.paginaProp,
+        items: this.itemsProp,
+        modo: this.modoProp,
+        alClicar: this.alClicarProp
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono irAPaginaPrimera donde {
+        asigno this.pagina como 1.
+        hago asíncronamente this.obtenerDatos().
+      }.
+      método asíncrono irAPaginaAnterior donde {
+        si this.pagina es menor que 1 asigno this.pagina como 1.
+        si this.pagina es igual que 1 retorno.
+        decremento this.pagina en 1.
+        hago asíncronamente this.obtenerDatos().
+      }.
+      método asíncrono irAPaginaSiguiente donde {
+        si this.datos.length no es igual que 20 retorno.
+        incremento this.pagina en 1.
+        hago asíncronamente this.obtenerDatos().
+        si this.datos.length es igual que 0 hago asíncronamente this.irAPaginaAnterior().
+      }.
+      método seleccionarItem con (dato) donde {
+        si this.modo es igual que "selector múltiple" {
+          si this.seleccion no es tipo lista {
+            asigno this.seleccion como [ dato ].
+          } y si no {
+            creo posicionActual como this.seleccion.indexOf(dato).
+            si posicionActual es igual que 0-1 {
+              hago this.seleccion.push(dato).
+            } y si no {
+              hago this.seleccion.splice(posicionActual, 1).
+            }.
+          }.
+        }.
+        si this.modo es igual que "selector" {
+          si this.seleccion es tipo objeto y this.seleccion es igual que dato {
+            asigno this.seleccion como undefined.
+          } y si no {
+            asigno this.seleccion como dato.
+          }.
+        }.
+      }.
+      método asíncrono obtenerDatos donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "http://127.0.0.1:5054/ConsultarDatos"
+          con método "POST"
+          con cuerpo {
+            tabla: this.tabla,
+            filtros: this.filtros,
+            orden: this.orden,
+            pagina: this.pagina,
+            items: this.items
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores hago this.root.gestionarError(error).
+        asigno this.datos como respuesta_1.data.data.datos.
+        hago this.$forceUpdate(true).
+      } en errores hago this.root.gestionarError(error).
+    }.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtenerDatos().
+    }.
+  }.
+}.

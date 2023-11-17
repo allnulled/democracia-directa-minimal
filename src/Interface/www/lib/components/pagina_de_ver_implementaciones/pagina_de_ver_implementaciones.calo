@@ -1,0 +1,44 @@
+asigno window.PaginaDeVerImplementaciones como un componente vue2 con nombre "PaginaDeVerImplementaciones" con plantilla {
+  <div class="PaginaDeVerImplementaciones Component">
+    <WinVentana titulo="🌐 Ver implementaciones">
+      <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:'/'},{texto: 'Ver implementaciones',link:false}]" />
+      <div class="padding_1">
+        <ExploradorDeDatos ref="explorador"
+          :root="root"
+          tabla-prop="Implementacion"
+          :filtros-prop="filtros"
+          :orden-prop="orden"
+          :pagina-prop="pagina"
+          :items-prop="items"
+          :al-clicar-prop="(componente, dato) => $router.history.push('/VerImplementacion/' + dato.id)"
+        />
+      </div>
+    </WinVentana>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      debugo "PaginaDeVerImplementaciones.data".
+      creo filtrosJson como this.$route.query.filtros.
+      creo filtros como JSON.parse(filtrosJson o "[]").
+      creo ordenJson como this.$route.query.orden.
+      creo orden como JSON.parse(ordenJson o '[["id","DESC"]]').
+      retorno {
+        filtros,
+        orden,
+        pagina: 1,
+        items: 20
+      }.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método mounted donde {}.
+  }.
+}.

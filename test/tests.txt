@@ -1,0 +1,16 @@
+# Login:
+http://127.0.0.1:5054/Login?nombre=admin&contrasenya=admin
+# Logout:
+http://127.0.0.1:5054/Logout?authorization=uWWhBGjOqRtzbRDKGabg3DiOWQ3YaYZohx6nz0RTq6iQZxo8Kp5wg72jhRlFhlV2WRPp3hNHVnrP0pCqxu7h9P3oY90njBdy20S
+# CrearVotacion:
+http://127.0.0.1:5054/CrearVotacion?presentacion=ok&fecha_de_presentacion=2023-05-01&fecha_de_problemas=2023-05-02&fecha_de_soluciones=2023-05-03&fecha_de_implementaciones=2023-05-04&fecha_de_aplicaciones=2023-05-05
+# ProgresarEstadoDeVotacion:
+http://127.0.0.1:5054/ProgresarEstadoDeVotacion?id_votacion=1
+# CrearProblema:
+http://127.0.0.1:5054/CrearProblema?titulo=Titulo del problema&descripcion=Descripcion del problema&contenido=Cotenido del problema&id_votacion=1
+# CrearSolucion:
+http://127.0.0.1:5054/CrearSolucion?titulo=Titulo de la solucion&descripcion=Descripcion de la solucion&contenido=Cotenido de la solucion&id_votacion=1&id_problema=1
+# CrearImplementacion:
+http://127.0.0.1:5054/CrearImplementacion?titulo=Titulo de la implementacion&descripcion=Descripcion de la implementacion&contenido=Cotenido de la implementacion&id_votacion=1&id_problema=1&id_solucion=1
+# DarVoto:
+http://127.0.0.1:5054/DarVoto?sentido=-&id_problema=10

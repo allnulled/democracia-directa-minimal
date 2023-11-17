@@ -1,0 +1,247 @@
+Ejecutable como documento HTML5
+    con autor allnulled
+    con nombre index
+    con versión 1
+<head>
+    <title>🌐 Democracia Directa</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="lib/win7/win7.scoped.2.css" />
+    <link rel="stylesheet" type="text/css" href="lib/simple-grid/simple-grid.2.css" />
+    <link rel="stylesheet" type="text/css" href="lib/framework/framework.css" />
+    <link rel="stylesheet" type="text/css" href="lib/theme/theme.css" />
+    <script src="lib/calo/calo.js"></script>
+    <script src="lib/utilidades/utilidades.js"></script>
+    <script src="lib/components/migas_de_pan/migas_de_pan.js"></script>
+    <script src="lib/components/explorador_de_datos/explorador_de_datos.js"></script>
+    <script src="lib/components/visor_de_dato/visor_de_dato.js"></script>
+    <script src="lib/components/win_ventana/win_ventana.js"></script>
+    <script src="lib/components/pagina_de_inicio/pagina_de_inicio.js"></script>
+    <script src="lib/components/pagina_de_login/pagina_de_login.js"></script>
+    <script src="lib/components/pagina_de_crear_votacion/pagina_de_crear_votacion.js"></script>
+    <script src="lib/components/pagina_de_crear_problema/pagina_de_crear_problema.js"></script>
+    <script src="lib/components/pagina_de_crear_solucion/pagina_de_crear_solucion.js"></script>
+    <script src="lib/components/pagina_de_crear_implementacion/pagina_de_crear_implementacion.js"></script>
+    <script src="lib/components/pagina_de_ver_sesion/pagina_de_ver_sesion.js"></script>
+    <script src="lib/components/pagina_de_ver_votaciones/pagina_de_ver_votaciones.js"></script>
+    <script src="lib/components/pagina_de_ver_votacion/pagina_de_ver_votacion.js"></script>
+    <script src="lib/components/pagina_de_ver_problemas/pagina_de_ver_problemas.js"></script>
+    <script src="lib/components/pagina_de_ver_problema/pagina_de_ver_problema.js"></script>
+    <script src="lib/components/pagina_de_ver_soluciones/pagina_de_ver_soluciones.js"></script>
+    <script src="lib/components/pagina_de_ver_solucion/pagina_de_ver_solucion.js"></script>
+    <script src="lib/components/pagina_de_ver_implementaciones/pagina_de_ver_implementaciones.js"></script>
+    <script src="lib/components/pagina_de_ver_implementacion/pagina_de_ver_implementacion.js"></script>
+</head>
+<body><div id="app"></div></body>.
+
+asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
+  propiedad path como "/Login".
+  propiedad name como "PaginaDeLogin".
+  propiedad component como PaginaDeLogin.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerVotaciones".
+  propiedad name como "PaginaDeVerVotaciones".
+  propiedad component como PaginaDeVerVotaciones.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerVotacion/:id_votacion".
+  propiedad name como "PaginaDeVerVotacion".
+  propiedad component como PaginaDeVerVotacion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/CrearVotacion".
+  propiedad name como "PaginaDeCrearVotacion".
+  propiedad component como PaginaDeCrearVotacion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerProblemas".
+  propiedad name como "PaginaDeVerProblemas".
+  propiedad component como PaginaDeVerProblemas.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerProblema/:id_problema".
+  propiedad name como "PaginaDeVerProblema".
+  propiedad component como PaginaDeVerProblema.
+  propiedad props como {}.
+}, {
+  propiedad path como "/CrearProblema/:id_votacion".
+  propiedad name como "PaginaDeCrearProblema".
+  propiedad component como PaginaDeCrearProblema.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerSoluciones".
+  propiedad name como "PaginaDeVerSoluciones".
+  propiedad component como PaginaDeVerSoluciones.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerSolucion/:id_solucion".
+  propiedad name como "PaginaDeVerSolucion".
+  propiedad component como PaginaDeVerSolucion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/CrearSolucion/:id_problema".
+  propiedad name como "PaginaDeCrearSolucion".
+  propiedad component como PaginaDeCrearSolucion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerImplementaciones".
+  propiedad name como "PaginaDeVerImplementaciones".
+  propiedad component como PaginaDeVerImplementaciones.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerImplementacion/:id_implementacion".
+  propiedad name como "PaginaDeVerImplementacion".
+  propiedad component como PaginaDeVerImplementacion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/CrearImplementacion/:id_solucion".
+  propiedad name como "PaginaDeCrearImplementacion".
+  propiedad component como PaginaDeCrearImplementacion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/VerSesion".
+  propiedad name como "PaginaDeVerSesion".
+  propiedad component como PaginaDeVerSesion.
+  propiedad props como {}.
+}, {
+  propiedad path como "/".
+  propiedad name como "PaginaDeInicio".
+  propiedad component como PaginaDeInicio.
+  propiedad props como {}.
+}] con traducciones {
+    propiedad es como {}.
+    propiedad en como {}.
+    propiedad ca como {}.
+} con plantilla {
+  <div class="App Component Castelog-app win7">
+    <router-view v-if="typeof tokenDeSesion === 'string'" :root="this"></router-view>
+    <PaginaDeLogin v-else :root="this"></PaginaDeLogin>
+    <div class="caja_de_error_1" v-if="errores.length">
+      <div class="caja_de_error_2">
+        <div class="caja_de_error_3">
+          <div class="caja_de_error_4">
+            <WinVentana titulo="Errores de aplicación">
+              <div style="overflow: scroll">
+                <div class="caja_de_error_particular_1" v-for="error, errorIndex in errores" v-bind:key="'notificaciones-de-error-' + errorIndex">
+                  <div class="padding_2 padding_bottom_0 texto_de_error_1">
+                    <hr />
+                    <span>[{{ error.name }}] {{ error.message }} {{ error.stack }}</span>
+                  </div>
+                  <div class="padding_2 padding_top_0">
+                    <div class="texto_de_error_1" v-if="error.response">
+                      <hr />
+                      <div class="text_align_center"><b>Error de servidor:</b></div>
+                      <hr />
+                      <div><b>Error:</b> {{ error.response.data.error.name }}</div>
+                      <hr />
+                      <div><b>Mensaje:</b> {{ error.response.data.error.message }}</div>
+                      <div v-if="error.verDetalles">
+                        <hr />
+                        <div><b>Traza:</b> {{ error.response.data.error.stack }}</div>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="text_align_right">
+                      <button v-if="error.response" v-on:click="() => verDetallesDeError(errorIndex)">{{ error.verDetalles ? "Ocultar" : "Ver" }} detalles</button>
+                      <button v-on:click="() => limpiarError(errorIndex)">Aceptar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </WinVentana>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} con estilos {
+    html {}
+    body {}
+    .Component {}
+    .App {}
+} con lógica {
+  retorno {
+    método data donde {
+      retorno {
+        root: this,
+        errores: [],
+        esquema: undefined,
+        tokenDeSesion: undefined,
+        permisos: []
+      }.
+    }.
+    propiedad methods como {
+      método verDetallesDeError con (indice) donde {
+        asigno this.errores[indice].verDetalles como no no no this.errores[indice].verDetalles.
+        hago this.$forceUpdate(true).
+      }.
+      método limpiarError con (indice) donde {
+        hago this.errores.splice(indice, 1).
+        hago this.$forceUpdate(true).
+      }.
+      método gestionarError con (error) donde {
+        imprimo error.
+        apendizo error en this.errores.
+        hago this.$forceUpdate(true).
+      }.
+      método asíncrono login con (nombre, contrasenya) donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/Login"
+          con método "POST"
+          con cuerpo { nombre, contrasenya }
+          con cabeceras {}
+          en errores hago this.gestionarError(error).
+        si respuesta_1 es tipo indefinido retorno.
+        asigno this.tokenDeSesion como respuesta_1.data.data.sesion.token.
+        asigno this.permisos como respuesta_1.data.data.permisos.
+        hago this.$forceUpdate(true).
+      } en errores hago this.gestionarError(error).
+      método asíncrono votarAFavor con (propiedad, valor) donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/DarVoto"
+          con método "POST"
+          con cuerpo {
+            sentido: 1,
+            [propiedad]: parseInt(valor)
+          }
+          con cabeceras {
+            authorization: this.tokenDeSesion
+          }
+          en errores hago this.gestionarError(error).
+        compruebo que respuesta_1.data.data.mensaje es igual que "El voto fue asignado correctamente".
+      }.
+      método asíncrono votarEnContra con (propiedad, valor) donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/DarVoto"
+          con método "POST"
+          con cuerpo {
+            sentido: 0-1,
+            [propiedad]: parseInt(valor)
+          }
+          con cabeceras {
+            authorization: this.tokenDeSesion
+          }
+          en errores hago this.gestionarError(error).
+        compruebo que respuesta_1.data.data.mensaje es igual que "El voto fue asignado correctamente".
+      }.
+      método asíncrono retirarVoto con (id_voto) donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/RetirarVoto"
+          con método "POST"
+          con cuerpo { id_voto: parseInt(id_voto) }
+          con cabeceras {
+            authorization: this.tokenDeSesion
+          }
+          en errores hago this.gestionarError(error).
+        compruebo que respuesta_1.data.data.mensaje es igual que "El voto fue eliminado correctamente".
+      }.
+    }.
+    propiedad watch como {}.
+    método beforeMount donde {
+      asigno this.$window como window.
+      asigno this.$utilidades como window.DemocraciaDirectaMinimal_utilidades.
+    }.
+    método mounted donde {}.
+  }.
+} montada en "#app".

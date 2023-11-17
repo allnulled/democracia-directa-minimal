@@ -1,0 +1,23 @@
+{
+  "name": "express-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "dev-ui": "npx nodemon -w index.1.html -x 'npm run build-ui'",
+    "build-ui": "cp src/Interface/www/index.1.html src/Interface/www/index.html",
+    "start": "node src/main.js",
+    "test": "node test/test.js",
+    "fake-db": "./test/test-copy-database.sh"
+  },
+  "keywords": [],
+  "author": "https://github.com/allnulled",
+  "license": "WTFPL",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "sqlstring": "^2.3.3"
+  }
+}

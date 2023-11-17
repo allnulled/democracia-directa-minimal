@@ -1,0 +1,54 @@
+asigno window.PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plantilla {
+  <div class="PaginaDeInicio Component">
+    <WinVentana titulo="🌐 Inicio">
+      <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:false}]" />
+      <div class="">
+        <div class="padding_1">
+          <ul class="row lista_grande_1">
+            <li class="col-6">
+              <router-link class="boton_grande_1" to='/VerVotaciones?filtros=[["estado", "!=", "Histórico"]]'>
+                <span>Votaciones</span>
+              </router-link>
+            </li>
+            <li class="col-6">
+              <router-link class="boton_grande_1" to="/VerProblemas">
+                <span>Problemas</span>
+              </router-link>
+            </li>
+            <li class="col-6">
+              <router-link class="boton_grande_1" to="/VerSoluciones">
+                <span>Soluciones</span>
+              </router-link>
+            </li>
+            <li class="col-6">
+              <router-link class="boton_grande_1" to="/VerImplementaciones">
+                <span>Implementaciones</span>
+              </router-link>
+            </li>
+            <li class="col-6">
+              <router-link class="boton_grande_1" to="/VerSesion">
+                <span>Sesión</span>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </WinVentana>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      retorno {}.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método mounted donde {}.
+  }.
+}.

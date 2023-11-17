@@ -1,0 +1,351 @@
+@font-face {
+    font-family: Roboto;
+    src: url("./fonts/Roboto/Roboto-Regular.ttf");
+}
+h5 {
+    margin: 0;
+    padding: 4px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 12px;
+}
+h5 * {
+    color: white;
+}
+ul, li {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+a {
+    
+}
+.win7 select,
+.win7 input[type="email"],
+.win7 input[type="number"],
+.win7 input[type="password"],
+.win7 input[type="text"],
+.win7 input[type="date"],
+.win7 input[type="datetime-local"],
+.win7 textarea {
+    width: 100%;
+}
+textarea {
+    resize: vertical;
+}
+ul.lista_grande_1 {
+    margin-top: 4px !important;
+}
+ul.lista_grande_1 > li {
+    margin-top: 0px !important;
+    margin-bottom: 4px !important;
+}
+
+.boton_grande_1 {
+    display: table;
+    color: white;
+    background-color: #D0D0D0;
+    width: 100%;
+    min-height: 30px;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 12px;
+    transition: .2s linear background-color;
+}
+.boton_grande_1:hover {
+    box-shadow: 0 0 0px black;
+    background-color: #DFDFDF;
+}
+.boton_grande_1 > * {
+    display: table-cell;
+    vertical-align: middle;
+}
+.recuadro_1 {
+    border: 1px solid #333;
+}
+.etiqueta_de_formulario_1 {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    padding-top: 8px;
+}
+.etiqueta_de_boton_1 {
+    font-size: 10px;
+    margin: 0;
+    margin-top: 4px;
+    padding: 0;
+    padding-top: 4px;
+    border-top: 1px solid #ccc;
+}
+.pagina_de_login_caja_1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.pagina_de_login_caja_2 {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.pagina_de_login_caja_3 {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.pagina_de_login_caja_4 {
+    display: inline-block;
+    max-width: 300px;
+    text-align: center;
+    margin-top: -75px;
+}
+.pagina_de_login_caja_5 {
+    display: block;
+    max-width: 300px;
+    text-align: left;
+}
+.win_ventana {
+    display: inline-block;
+    width: auto;
+}
+.migas_de_pan_parametros_1 {
+    font-size: 10px;
+    font-weight: normal;
+}
+.visor_de_tabla_1 {
+    overflow: scroll;
+}
+.caja_de_error_1 .win_ventana > .window > .window-body {
+    overflow: scroll;
+    max-height: 200px;
+}
+.caja_de_error_1 .win_ventana > .window::before {
+    background: linear-gradient(transparent 20%,hsla(0,0%,100%,.7) 40%,transparent 41%),linear-gradient(90deg,hsla(0,0%,100%,.4),rgba(0,0,0,.1),hsla(0,0%,100%,.2)),linear-gradient(55deg,transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.1) 50%,transparent 53%),#730000;
+}
+.caja_de_error_1 .win_ventana > .window > .title-bar {
+    background: linear-gradient(90deg,hsla(0,0%,100%,.4),rgba(0,0,0,.1),hsla(0,0%,100%,.2)),linear-gradient(55deg,transparent,rgba(0,0,0,.1) 20%,rgba(0,0,0,.1) 50%,transparent 53%),#730000;
+}
+.caja_de_error_1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.caja_de_error_2 {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.caja_de_error_3 {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+.caja_de_error_4 {
+    display: inline-block;
+    position: relative;
+    max-width: 350px;
+    text-align: left;
+}
+.caja_de_error_particular_1 {
+    
+}
+.caja_de_error_particular_1 .win_ventana {
+    
+}
+.visor_de_dato {
+    margin-bottom: 4px;
+}
+.visor_de_dato .item_de_campo {
+    padding: 8px;
+    margin: 4px;
+    margin-bottom: 0px;
+    background-color: #DDD;
+}
+.visor_de_dato .etiqueta_de_campo {
+    font-size: 10px;
+    font-family: Roboto;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.visor_de_dato .valor_de_campo {
+    font-size: 12px;
+    font-family: Roboto;
+}
+table.tabla {
+    border-collapse: collapse;
+    width: 100%;
+}
+table.tabla th {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: Roboto;
+    padding: 4px;
+    border-left: 1px solid #222;
+}
+table.tabla td {
+    border-left: 1px solid #222;
+    border-bottom: 1px solid #666;
+    text-align: center;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+h5 a {
+    color: rgb(129, 129, 255) !important;
+}
+
+.win7 button.boton_de_tabla_1 {
+    font-size: 10px;
+}
+
+.caja_de_paginacion_1 {}
+.caja_de_paginacion_2 {}
+.caja_de_paginacion_3 {}
+.caja_de_paginacion_4 {}
+
+.etiqueta_de_parametro_1 {
+    text-decoration: underline;
+    font-weight: bold;
+}
+/*
+.win7 button.danger_button {
+    background: linear-gradient(180deg,#e1afaf 45%,#ce9595 0,#c62525)
+}
+.win7 button.danger_button:hover {
+    background: linear-gradient(180deg,#c97979 45%,#c05d5d 0,#d50a0a);
+    color: white;
+}
+.win7 button.neutral_button {
+    background: linear-gradient(180deg,#90a9d0 45%,rgb(116, 147, 235) 0,#5871e4);
+    color: white;
+}
+.win7 button.neutral_button:hover {
+    background: linear-gradient(180deg,#7495ca 45%,rgb(90, 128, 232) 0,#3556e8);
+    color: white;
+}
+.win7 button.success_button {
+    background: linear-gradient(180deg,#b8ccad 45%,#add298 0,#519b4f);
+}
+.win7 button.success_button:hover {
+    background: linear-gradient(180deg,#77cb4a 45%,#74c744 0,#3ba437);
+    color: white;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+.padding_2 {
+    padding: 8px;
+}
+
+.padding_1 {
+    padding: 4px;
+}
+.padding_0 {
+    padding: 0px;
+}
+
+.padding_top_1 {
+    padding-top: 4px;
+}
+.padding_bottom_1 {
+    padding-top: 4px;
+}
+.padding_left_1 {
+    padding-left: 4px;
+}
+.padding_right_1 {
+    padding-right: 4px;
+}
+
+.padding_top_0 {
+    padding-top: 0px;
+}
+.padding_bottom_0 {
+    padding-bottom: 0px;
+}
+.padding_left_0 {
+    padding-left: 0px;
+}
+.padding_right_0 {
+    padding-right: 0px;
+}
+
+
+.margin_1 {
+    margin: 4px;
+}
+.margin_0 {
+    margin: 0px;
+}
+
+.margin_top_1 {
+    margin-top: 4px;
+}
+.margin_bottom_1 {
+    margin-bottom: 4px;
+}
+.margin_left_1 {
+    margin-left: 4px;
+}
+.margin_right_1 {
+    margin-right: 4px;
+}
+
+.margin_top_0 {
+    margin-top: 0px;
+}
+.margin_bottom_0 {
+    margin-top: 0px;
+}
+.margin_left_0 {
+    margin-left: 0px;
+}
+.margin_right_0 {
+    margin-right: 0px;
+}
+
+
+.width_auto {
+    width: auto !important;
+}
+.width_100 {
+    width: 100% !important;
+}
+.min_width_auto {
+    min-width: auto !important;
+}
+.min_width_100 {
+    min-width: 100% !important;
+}
+.text_align_center {
+    text-align: center;
+}
+.text_align_justified {
+    text-align: justified;
+}
+.text_align_left {
+    text-align: left;
+}
+.text_align_right {
+    text-align: right;
+}
+

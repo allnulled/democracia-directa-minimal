@@ -1,0 +1,108 @@
+asigno window.PaginaDeCrearSolucion como un componente vue2 con nombre "PaginaDeCrearSolucion" con plantilla {
+  <div class="PaginaDeCrearSolucion Component">
+    <WinVentana titulo="🌐 Crear solución">
+      <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:'/'},{texto: 'Ver problemas', link:'/VerProblemas'},{texto: 'Problema',link:'/VerProblema/' + this.$route.query.id_problema},{texto: 'Crear solución',link: false}]" />
+      <div class="">
+        <div class="padding_1 visor_de_dato">
+        
+          <div class="item_de_campo">
+            <div class="etiqueta_de_campo">
+              <span>Título:</span>
+            </div>
+            <div class="valor_de_campo">
+              <input type="text" class="" v-model="titulo" />
+            </div>
+          </div>
+        
+          <div class="item_de_campo">
+            <div class="etiqueta_de_campo">
+              <span>Descripción:</span>
+            </div>
+            <div class="valor_de_campo">
+              <textarea type="text" class="" v-model="descripcion"></textarea>
+            </div>
+          </div>
+        
+          <div class="item_de_campo">
+            <div class="etiqueta_de_campo">
+              <span>Contenido:</span>
+            </div>
+            <div class="valor_de_campo">
+              <textarea type="text" class="" v-model="contenido"></textarea>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="padding_1 padding_top_0 padding_bottom_0">
+            <button class="width_100" v-on:click="() => crearSolucion()">Crear solución</button>
+          </div>
+
+        </div>
+      </div>
+    </WinVentana>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      propiedad root como {
+        propiedad type como Object.
+        propiedad required como true.
+      }.
+    }.
+    método data donde {
+      retorno {
+        titulo: "",
+        descripcion: "",
+        contenido: "",
+        id_votacion: undefined,
+        id_problema: parseInt(this.$route.params.id_problema)
+      }.
+    }.
+    propiedad methods como {
+      método asíncrono crearSolucion donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/CrearSolucion"
+          con método "POST"
+          con cuerpo {
+            titulo: this.titulo,
+            descripcion: this.descripcion,
+            contenido: this.contenido,
+            id_votacion: this.id_votacion,
+            id_problema: this.id_problema
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores hago this.root.gestionarError(error).
+        si respuesta_1 es tipo indefinido retorno.
+        compruebo que respuesta_1.data.data.mensaje es igual que "La solución fue creada correctamente".
+        creo idSolucion como respuesta_1.data.data.id.
+        hago this.$router.history.push("/VerSolucion/" + idSolucion).
+      } en errores hago this.root.gestionarError(error).
+      método asíncrono obtenerDatosPrevios donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/ConsultarDatos"
+          con método "POST"
+          con cuerpo {
+            tabla: "Problema",
+            filtros: [
+              ["id", "=", this.id_problema]
+            ]
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores hago this.root.gestionarError(error).
+        compruebo que respuesta_1.data.data.mensaje es igual que "La consulta fue realizada correctamente".
+        creo problema como respuesta_1.data.data.datos[0].
+        asigno this.id_votacion como problema.id_votacion.
+      } en errores hago this.root.gestionarError(error).
+    }.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtenerDatosPrevios().
+    }.
+  }.
+}.
