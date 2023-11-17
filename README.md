@@ -1,119 +1,84 @@
-# express-boilerplate
+º democracia-directa-minimal
 
-Código fuente base para servidores basados en Node.js + Express + SQLite.
+Software libre de organización civil por método asambleario. 
 
-## Índice
+## Requisitos
 
-- [express-boilerplate](#express-boilerplate)
-  - [Índice](#índice)
-  - [Instalación](#instalación)
-  - [Ejecución](#ejecución)
-  - [Filosofía](#filosofía)
-  - [Uso](#uso)
-    - [Crear un controlador](#crear-un-controlador)
-    - [Crear una utilidad](#crear-una-utilidad)
-    - [Crear un modelo de dato](#crear-un-modelo-de-dato)
-    - [Crear un comando](#crear-un-comando)
-    - [Crear una configuración](#crear-una-configuración)
-  - [¿Qué más ofrece el boilerplate?](#qué-más-ofrece-el-boilerplate)
+Para hacer funcionar este software necesitas tener instalado:
+
+- `npm` y `node` que puedes conseguir los 2 a la vez de su fuente oficial aquí:
+   - [https://nodejs.org/en/download](https://nodejs.org/en/download)
+- (Opcional) `git` 
 
 ## Instalación
 
-Descarga el proyecto y ejecuta `npm install` para instalar las dependencias.
+Descarga y descomprime el proyecto en una carpeta. O también puedes usar `git` tal que así:
 
-## Ejecución
+```sh
+git clone https://github.com/allnulled/democracia-directa-minimal.git .
+```
 
-Para ejecutarlo simplemente `npm start`.
+Después, necesitarás `npm` para poder instalar todas las dependencias de `node_modules` así:
+
+```sh
+npm install
+```
+
+## Arranque
+
+Para arrancar también necesitarás `npm` y `node`. Una vez los tengas disponibles desde línea de comandos, puedes:
+
+```sh
+npm start
+```
+
+Luego puedes entrar así con Firefox desde línea de comandos:
+
+```
+firefox http://127.0.0.1:5054/ui
+```
 
 ## Filosofía
 
-Este proyecto es completamente **minimalista**.
+Este software sirve para organizar comunidades basándose en votaciones. El software contempla los siguientes pasos:
 
-La ejecución se basa prácticamente en 1 fichero:
-  - `src/main.js`: define el proceso principal.
+ - **Fase problemas:**
+   - La creación de problemas.
+   - La votación de problemas (a favor, en contra o indiferente).
+ - **Fase de soluciones:**
+   - La creación de soluciones.
+   - La votación de soluciones (a favor, en contra o indiferente).
+ - **Fase de implementaciones:**
+   - La creación de implementaciones (de solución).
+   - La votación de implementaciones (a favor, en contra o indiferente).
 
-Los datos se basan en 2 ficheros más:
-  - `src/Database/scripts/creation.sql`
-  - `src/Database/scripts/migration.sql`
+También existe un mecanismo para cada una de las siguientes operaciones:
+  
+  - **Crear una nueva votación.**
+  - **Hacer progresar el estado de una votación.**
+  - **Consultar votaciones, problemas, soluciones e implementaciones actuales.**
 
-Además, en el código original, la base de datos es SQLite, por lo cual es un proyecto compacto, que no depende de URLs/servidores externos.
+Con todo esto, este software pretende cumplir con la finalidad de organizar la voluntad de una comunidad igualitaria, tanto creando propuestas como votándolas.
 
 ## Uso
 
-A continuación se detallan los procesos de desarollo siguientes:
+Por defecto, hay 2 usuarios en el sistema:
+  - `admin` (contraseña: `admin`)
+  - `noadmin` (contraseña: `noadmin`)
 
-  1. [Crear un controlador](#crear-un-controlador).
-  2. [Crear una utilidad](#crear-una-utilidad).
-  3. [Crear un modelo de dato](#crear-un-modelo-de-dato).
-  4. [Crear un comando](#crear-un-comando).
-  5. [Crear una configuración](#crear-una-configuración).
+Utilízalos para organizarte una comunidad de usuarios, luego cambia las contraseñas para hacerlas seguras utilizando algún software para acceder a la base de datos `sqlite` (como por ejemplo *DB Browser for SQLite* en Linux).
 
-### Crear un controlador
+A continuación se listan las operaciones que este software sí contempla:
 
-En `src/Controllers` puedes crear un fichero como éste, que es el de `IndexController`:
+  - Navegar por votaciones, problemas, soluciones e implementaciones.
+  - Crear nuevos problemas, soluciones e implementaciones.
+  - Votar a favor, en contra y retirar voto de problemas, soluciones e implementaciones.
+  - Crear nuevas votaciones (solo administradores).
+  - Hacer progresar el estado de las votaciones (solo administradores).
 
-```js
-module.exports = class {
-    method = "use";
-    route = "/";
-    getMiddleware() { return []; }
-    async dispatch(request, response, next) {
-        this.api.Utilities.Trace("api.Controllers.IndexController");
-        try {
-            const errorParameter = this.api.Utilities.GetRequestParameter(request, "error", false);
-            if(typeof errorParameter === "string") {
-                throw new Error(errorParameter);
-            }
-            const db = this.api.Utilities.GetDatabaseConnection();
-            const [{ Result: result }] = await db.Execute("SELECT 100 as 'Result';");
-            const [{ Result: result2 }] = await this.api.Utilities.QueryDatabase("SELECT 200 as 'Result';");
-            return this.api.Utilities.DispatchSuccess(response, {
-                message: "The API is working",
-                result: result + result2
-            });
-        } catch (error) {
-            return this.api.Utilities.DispatchError(response, error);
-        }
-    }
-};
-```
+A continuación se listas las operaciones que este software no contempla actualmente:
 
-La `api` (con `Utilities`) se inyecta en todas las clases de controlador, una vez instanciado. También se recibe como parámetro en el `constructor`.
+  - **Crear un usuario.** No hay un mecanismo de registro público. Cada nuevo usuario debe ser introducido a la base de datos directamente. Esto asegura el hermetismo de la comunidad, así como el ahuyentar trolls que pueden fastidiarlo todo bien rápidamente (inflándolo de propuestas *fake* que ensucien los datos y ofusquen las buenas propuestas, consumiendo tiempo del resto de miembros de la comunidad en filtrar las propuestas *fake*). De habilitarse en un futuro, el registro seguiría sin estar en manos del usuario final, y en cambio sería un proceso que le correspondería al administrador.
 
-### Crear una utilidad
 
-En `src/Utilities` puedes crear un fichero como éste:
-
-```js
-module.exports = class {
-    action() {
-        this.api.Utilities.Trace("api.Utilities.GetDatabaseConnection");
-        return this.api.Database.Connection;
-    }
-}
-```
-
-Esta utilidad es una `action`, pero también puedes crear una utilidad `factory` simplemente escribiendo el método `factory` (y no `action`) a modo de *factory* propiamente, o fábrica del valor final de la utilidad.
-
-La `api` (con `Utilities`) se inyecta en todas las clases de utilidad, una vez instanciada. También se recibe como parámetro en el `constructor`.
-
-### Crear un modelo de dato
-
-En `src/Database/scripts/creation.sql` añades la tabla de datos que deseas.
-
-### Crear un comando
-
-En `package.json` el apartado `scripts` te será de ayuda en esto. Los comandos se ejecutarían mediante `npm`.
-
-### Crear una configuración
-
-En `src/main.js` tienes la función `setupConfigurations`, donde se establecen los valores para las variables de entorno de `process.env`. Puedes añadrila ahí.
-
-## ¿Qué más ofrece el boilerplate?
-
-Unas pocas clases utilitarias:
-
- - Para homogeneizar las salidas y entradas JSON de los controladores: `DispatchSuccess` y `DispatchError`.
- - Para tratamiento de fechas y texto general: `GetDateFromString`, `GetDateToString`, `GetStringLeftPadded`.
- - Para bases de datos: `GetDatabaseConnection`, `InitializeDatabase`, `QueryDatabase`.
- - Para gestionar peticiones: `GetRequestParameter`.
+  
