@@ -8,7 +8,7 @@ Para hacer funcionar este software necesitas tener instalado:
 
 - `npm` y `node` que puedes conseguir los 2 a la vez de su fuente oficial aquí:
    - [https://nodejs.org/en/download](https://nodejs.org/en/download)
-- (Opcional) `git` 
+- `git`, que es opcional y solo se usa para la descarga del proyecto.
 
 ## Instalación
 
@@ -32,7 +32,7 @@ Para arrancar también necesitarás `npm` y `node`. Una vez los tengas disponibl
 npm start
 ```
 
-Luego puedes entrar así con Firefox desde línea de comandos:
+Luego puedes entrar así con Firefox, por ejemplo, desde línea de comandos:
 
 ```
 firefox http://127.0.0.1:5054/ui
