@@ -1,4 +1,8 @@
 importo módulo es5 de ruta __dirname + "/lib/calo/calo.js".
 importo módulo es5 de ruta __dirname + "/tests/ciclo_democratico/test_de_ciclo_democratico.js" creando constante test_de_ciclo_democratico.
 
-hago test_de_ciclo_democratico().
+creo main como una función asíncrona donde {
+  hago asíncronamente test_de_ciclo_democratico().
+}.
+
+hago main().

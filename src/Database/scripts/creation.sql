@@ -62,6 +62,7 @@ CREATE TABLE Implementacion (
     titulo VARCHAR(1024),
     descripcion TEXT,
     contenido TEXT,
+    procedimiento TEXT,
     id_votacion INTEGER,
     id_problema INTEGER,
     id_solucion INTEGER,
@@ -83,4 +84,12 @@ CREATE TABLE Voto (
     FOREIGN KEY (id_solucion) REFERENCES Solucion (id),
     FOREIGN KEY (id_implementacion) REFERENCES Implementacion (id),
     FOREIGN KEY (id_usuario) REFERENCES Usuario (id)
+);
+
+CREATE TABLE Ley (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT,
+    contenido TEXT,
+    id_implementacion INTEGER,
+    FOREIGN KEY (id_implementacion) REFERENCES Implementacion (id)
 );

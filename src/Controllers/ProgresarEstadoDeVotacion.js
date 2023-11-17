@@ -19,6 +19,9 @@ module.exports = class {
             const votacion = await this.getVotacion(parametrosFormateados);
             const siguienteEstado = this.validateCambioDeEstado(votacion);
             await this.updateEstadoDeVotacion(votacion.id, siguienteEstado);
+            if(siguienteEstado === "Aplicaciones") {
+                await this.updateAplicaciones(siguienteEstado);
+            }
             return this.api.Utilities.DispatchSuccess(response, {
                 mensaje: `La votación progresó a estado «${siguienteEstado}» correctamente`,
                 estado: siguienteEstado,
@@ -103,6 +106,10 @@ module.exports = class {
         sql += sqlstring.escape(idVotacion);
         sql += ";";
         await this.api.Utilities.QueryDatabase(sql);
+    }
+
+    async updateAplicaciones() {
+        // throw new Error("Todavía no implementado método «updateAplicaciones»");
     }
 
 };

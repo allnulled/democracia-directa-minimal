@@ -17,7 +17,8 @@ module.exports = class {
         "Problema",
         "Solucion",
         "Implementacion",
-        "Voto"
+        "Voto",
+        "Ley"
     ];
 
     operacionesDisponibles = [
