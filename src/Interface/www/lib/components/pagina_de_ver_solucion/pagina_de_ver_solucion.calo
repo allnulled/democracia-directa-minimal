@@ -93,9 +93,8 @@ asigno window.PaginaDeVerSolucion como un componente vue2 con nombre "PaginaDeVe
           en errores {
             hago this.root.gestionarError(error).
           }.
-        imprimo respuesta_1.data.
         asigno this.votosTotales como respuesta_1.data.data.datos.
-      }.
+      } en errores hago this.gestionarError(error).
       método asíncrono obtenerVoto donde {
         creo respuesta_1 como asíncronamente una petición http
           con url "/ConsultarDatos"
@@ -119,7 +118,7 @@ asigno window.PaginaDeVerSolucion como un componente vue2 con nombre "PaginaDeVe
           asigno this.votoPrevio como undefined.
         }.
         hago asíncronamente this.obtenerTotalDeVotos().
-      }.
+      } en errores hago this.gestionarError(error).
     }.
     propiedad watch como {}.
     método beforeMount donde {}.

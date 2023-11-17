@@ -210,7 +210,7 @@ asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
           }
           en errores hago this.gestionarError(error).
         compruebo que respuesta_1.data.data.mensaje es igual que "El voto fue asignado correctamente".
-      }.
+      } en errores hago this.gestionarError(error).
       método asíncrono votarEnContra con (propiedad, valor) donde {
         creo respuesta_1 como asíncronamente una petición http
           con url "/DarVoto"
@@ -224,7 +224,7 @@ asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
           }
           en errores hago this.gestionarError(error).
         compruebo que respuesta_1.data.data.mensaje es igual que "El voto fue asignado correctamente".
-      }.
+      } en errores hago this.gestionarError(error).
       método asíncrono retirarVoto con (id_voto) donde {
         creo respuesta_1 como asíncronamente una petición http
           con url "/RetirarVoto"
@@ -235,7 +235,7 @@ asigno window.App como una aplicación vue2 con nombre "App" con rutas [{
           }
           en errores hago this.gestionarError(error).
         compruebo que respuesta_1.data.data.mensaje es igual que "El voto fue eliminado correctamente".
-      }.
+      } en errores hago this.gestionarError(error).
     }.
     propiedad watch como {}.
     método beforeMount donde {

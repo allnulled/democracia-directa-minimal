@@ -43,7 +43,11 @@
     [x] botón y progresar_estado_de_votacion (solo admins)
 
 [ ] Más interfaz gráfica
-    [ ] Mostrar los votos de cada
-        [ ] Problema
-        [ ] Solucion
-        [ ] Votacion
+    [x] Mostrar los votos de cada
+        [x] Problema
+        [x] Solucion
+        [x] Votacion
+    [ ] Incorporar filtros en explorador de tabla
+        [ ] sincronizados con los parámetros querystring.
+        [ ] ...
+    

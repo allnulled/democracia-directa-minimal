@@ -97,7 +97,6 @@ asigno window.PaginaDeVerProblema como un componente vue2 con nombre "PaginaDeVe
           en errores {
             hago this.root.gestionarError(error).
           }.
-        imprimo respuesta_1.data.
         asigno this.votosTotales como respuesta_1.data.data.datos.
       }.
       método asíncrono obtenerVoto donde {

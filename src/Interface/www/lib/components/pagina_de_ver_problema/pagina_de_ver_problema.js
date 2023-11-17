@@ -109,7 +109,6 @@ const respuesta_1 = (await Castelog.metodos.una_peticion_http("/ConsultarVotos",
 }, { authorization:this.root.tokenDeSesion
 }, null, error => {
 this.root.gestionarError( error );}));
-console.log(respuesta_1.data);
 this.votosTotales = respuesta_1.data.data.datos;
 } catch(error) {
 console.log(error);
@@ -125,7 +124,7 @@ parseInt( this.$route.params.id_problema ) ] ]
 }, { authorization:this.root.tokenDeSesion
 }, null, error => {
 this.root.gestionarError( error );}));
-if(!(respuesta_1.data.data.mensaje === "La consulta fue realizada correctamente")) throw new Error("Error en fichero [-] en posición [4822-4929=116:59-117:107] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"La consulta fue realizada correctamente\"");
+if(!(respuesta_1.data.data.mensaje === "La consulta fue realizada correctamente")) throw new Error("Error en fichero [-] en posición [4788-4895=115:59-116:107] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"La consulta fue realizada correctamente\"");
 if(respuesta_1.data.data.datos.length > 0) {
 this.haVotadoYa = true;
 this.votoPrevio = respuesta_1.data.data.datos[ 0 ];

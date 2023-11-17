@@ -111,10 +111,7 @@ const respuesta_1 = (await Castelog.metodos.una_peticion_http("/DarVoto", "POST"
 this.gestionarError( error );}));
 if(!(respuesta_1.data.data.mensaje === "El voto fue asignado correctamente")) throw new Error("Error en fichero [-] en posición [9073-9175=211:54-212:102] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"El voto fue asignado correctamente\"");
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.gestionarError( error );}
 },
 async votarEnContra( propiedad,
 valor ) {try {
@@ -123,24 +120,18 @@ const respuesta_1 = (await Castelog.metodos.una_peticion_http("/DarVoto", "POST"
 }, { authorization:this.tokenDeSesion
 }, null, error => {
 this.gestionarError( error );}));
-if(!(respuesta_1.data.data.mensaje === "El voto fue asignado correctamente")) throw new Error("Error en fichero [-] en posición [9613-9715=225:54-226:102] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"El voto fue asignado correctamente\"");
+if(!(respuesta_1.data.data.mensaje === "El voto fue asignado correctamente")) throw new Error("Error en fichero [-] en posición [9656-9758=225:54-226:102] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"El voto fue asignado correctamente\"");
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.gestionarError( error );}
 },
 async retirarVoto( id_voto ) {try {
 const respuesta_1 = (await Castelog.metodos.una_peticion_http("/RetirarVoto", "POST", { id_voto:parseInt( id_voto )
 }, { authorization:this.tokenDeSesion
 }, null, error => {
 this.gestionarError( error );}));
-if(!(respuesta_1.data.data.mensaje === "El voto fue eliminado correctamente")) throw new Error("Error en fichero [-] en posición [10096-10199=236:54-237:103] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"El voto fue eliminado correctamente\"");
+if(!(respuesta_1.data.data.mensaje === "El voto fue eliminado correctamente")) throw new Error("Error en fichero [-] en posición [10182-10285=236:54-237:103] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"El voto fue eliminado correctamente\"");
 } catch(error) {
-console.log(error);
-throw error;
-}
-
+this.gestionarError( error );}
 }
 },
 watch:{ 
