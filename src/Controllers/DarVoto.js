@@ -172,7 +172,7 @@ module.exports = class {
         let sql = "";
         sql += "SELECT * FROM Voto ";
         sql += "\n WHERE ";
-        sql += sqlstring.escapeId(columnaObjetivo);
+        sql += sqlstring.escapeId(columnaObjetivo); // id_problema, id_solucion o id_implementacion, por lo cual se divide por cada fase el cálculo del límite máximo de votos en la validación del voto
         sql += " IS NOT NULL";
         sql += "\n   AND id_usuario = ";
         sql += sqlstring.escape(parametros.id_usuario)

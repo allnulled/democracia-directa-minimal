@@ -90,3 +90,24 @@ A la hora de votar, hay una serie de límites:
      - votación de problemas: 10 votos.
      - votación de soluciones: 10 votos.
      - votación de implementaciones: 10 votos.
+  - El voto puede ser a favor, en contra o nulo.
+  - Las votaciones se someten a un proceso de estados donde pasan por:
+     - Estado de "Presentación":
+        - se anuncia una nueva votación, pero no puede hacerse nada más
+     - Estado de "Problemas":
+        - se pueden crear problemas
+        - se pueden votar problemas
+     - Estado de "Soluciones":
+        - se pueden crear soluciones
+        - se pueden votar soluciones
+     - Estado de "Implementaciones":
+        - se pueden crear implementaciones
+        - se pueden votar implementaciones
+     - Estado de "Aplicaciones":
+        - se aplican los cambios conforme a las implementaciones
+  - Solo un administrador puede hacer progresar el estado de la votación, que seguirá esos pasos:
+     - "Presentación"
+     - "Problemas"
+     - "Soluciones"
+     - "Implementaciones"
+     - "Aplicaciones"
