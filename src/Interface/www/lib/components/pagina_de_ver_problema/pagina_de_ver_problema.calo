@@ -16,13 +16,13 @@ asigno window.PaginaDeVerProblema como un componente vue2 con nombre "PaginaDeVe
       </div>
       <div class="padding_1 padding_top_0 row">
         <div class="col-4">
-          <button class="width_100 danger_button" v-on:click="() => root.votarEnContra('id_problema', $route.params.id_problema)">Votar en contra</button>
+          <button class="width_100 danger_button" :disabled="haVotadoYa" v-on:click="() => votarEnContra('id_problema', this.$route.params.id_problema)">Votar en contra</button>
         </div>
         <div class="col-4">
-          <button class="width_100 neutral_button" v-on:click="() => root.retirarVoto('id_problema', $route.params.id_problema)">Retirar voto</button>
+          <button class="width_100 neutral_button" :disabled="!haVotadoYa" v-on:click="() => retirarVoto(votoPrevio.id)">Retirar voto</button>
         </div>
         <div class="col-4">
-          <button class="width_100 success_button" v-on:click="() => root.votarAFavor('id_problema', $route.params.id_problema)">Votar a favor</button>
+          <button class="width_100 success_button" :disabled="haVotadoYa" v-on:click="() => votarAFavor('id_problema', this.$route.params.id_problema)">Votar a favor</button>
         </div>
       </div>
     </WinVentana>
@@ -38,6 +38,8 @@ asigno window.PaginaDeVerProblema como un componente vue2 con nombre "PaginaDeVe
     método data donde {
       debugo "PaginaDeVerProblema.data".
       retorno {
+        votoPrevio: undefined,
+        haVotadoYa: false,
         busqueda: {
           filtros: [
             ["id_problema", "=", this.$route.params.id_problema]
@@ -45,7 +47,46 @@ asigno window.PaginaDeVerProblema como un componente vue2 con nombre "PaginaDeVe
         }
       }.
     }.
-    propiedad methods como {}.
+    propiedad methods como {
+      método asíncrono votarEnContra con (propiedad, valor) donde {
+        hago asíncronamente this.root.votarEnContra(propiedad, valor).
+        hago asíncronamente this.obtenerVoto().
+        hago this.$forceUpdate(true).
+      }.
+      método asíncrono retirarVoto con (propiedad, valor) donde {
+        hago asíncronamente this.root.retirarVoto(propiedad, valor).
+        hago asíncronamente this.obtenerVoto().
+        hago this.$forceUpdate(true).
+      }.
+      método asíncrono votarAFavor con (propiedad, valor) donde {
+        hago asíncronamente this.root.votarAFavor(propiedad, valor).
+        hago asíncronamente this.obtenerVoto().
+        hago this.$forceUpdate(true).
+      }.
+      método asíncrono obtenerVoto donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/ConsultarDatos"
+          con método "POST"
+          con cuerpo {
+            tabla: "Voto",
+            filtros: [
+              ["id_problema", "=", parseInt(this.$route.params.id_problema)]
+            ]
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores hago this.root.gestionarError(error).
+        compruebo que respuesta_1.data.data.mensaje es igual que "La consulta fue realizada correctamente".
+        si respuesta_1.data.data.datos.length es mayor que 0 {
+          asigno this.haVotadoYa como true.
+          asigno this.votoPrevio como respuesta_1.data.data.datos[0].
+        } y si no {
+          asigno this.haVotadoYa como false.
+          asigno this.votoPrevio como undefined.
+        }.
+      }.
+    }.
     propiedad watch como {}.
     método beforeMount donde {}.
     método asíncrono mounted donde {}.
