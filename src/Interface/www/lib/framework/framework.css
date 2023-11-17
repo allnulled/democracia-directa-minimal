@@ -218,7 +218,7 @@ h5 a {
     text-decoration: underline;
     font-weight: bold;
 }
-/*
+
 .win7 button.danger_button {
     background: linear-gradient(180deg,#e1afaf 45%,#ce9595 0,#c62525)
 }
@@ -227,12 +227,13 @@ h5 a {
     color: white;
 }
 .win7 button.neutral_button {
-    background: linear-gradient(180deg,#90a9d0 45%,rgb(116, 147, 235) 0,#5871e4);
-    color: white;
+    background: linear-gradient(180deg,#bdd6ff 45%,rgb(201, 216, 255) 0,#ffffff);
 }
 .win7 button.neutral_button:hover {
-    background: linear-gradient(180deg,#7495ca 45%,rgb(90, 128, 232) 0,#3556e8);
-    color: white;
+    background: linear-gradient(180deg,#87b5ff 45%,rgb(149, 177, 254) 0,#ffffff);
+}
+.win7 button.neutral_button[disabled="true"]] {
+    background: inherit;
 }
 .win7 button.success_button {
     background: linear-gradient(180deg,#b8ccad 45%,#add298 0,#519b4f);
@@ -241,8 +242,13 @@ h5 a {
     background: linear-gradient(180deg,#77cb4a 45%,#74c744 0,#3ba437);
     color: white;
 }
-*/
-
+.row [class^="col"] > button {
+    margin-top: 4px;
+}
+.row [class^="col"] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 
 

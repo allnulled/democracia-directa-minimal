@@ -131,6 +131,8 @@ const deployApplication = function (api) {
     api.app.listen(process.env.APP_PORT, function () {
       console.log("[*] App escuchando en:");
       console.log("    - http://127.0.0.1:" + process.env.APP_PORT);
+      console.log("    - http://127.0.0.1:" + process.env.APP_PORT + "/ui");
+      console.log("    - http://127.0.0.1:" + process.env.APP_PORT + "/ui/index.1.html (desarrollo)");
       ok();
     });
   })
