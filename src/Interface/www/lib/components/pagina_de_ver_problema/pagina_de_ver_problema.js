@@ -4,6 +4,26 @@ window.PaginaDeVerProblema = Castelog.metodos.un_componente_vue2("PaginaDeVerPro
  + "    <WinVentana titulo=\"🌐 Ver problema\">"
  + "      <MigasDePan :root=\"root\" :migas=\"[{texto: 'Inicio',link:'/'},{texto: 'Ver problemas',link:'/VerProblemas'},{texto: 'Ver problema',link:false}]\" />"
  + "      <VisorDeDato :root=\"root\" tabla-prop=\"Problema\" :id-prop=\"this.$route.params.id_problema\" />"
+ + "      <div class=\"padding_1 padding_top_0\">"
+ + "        <div class=\"text_align_center\">"
+ + "          <div class=\"\">"
+ + "            <table class=\"tabla_de_votos\">"
+ + "              <tr>"
+ + "                <td class=\"text_align_center\">"
+ + "                  <div class=\"etiqueta_de_votos\">"
+ + "                  {{ votosTotales.negativos }} negativo{{ votosTotales.positivos === 1 ? '' : 's' }}"
+ + "                  </div>"
+ + "                </td>"
+ + "                <td class=\"text_align_center\">"
+ + "                  <div class=\"etiqueta_de_votos\">"
+ + "                  {{ votosTotales.positivos }} positivo{{ votosTotales.positivos === 1 ? '' : 's' }}"
+ + "                  </div>"
+ + "                </td>"
+ + "              </tr>"
+ + "            </table>"
+ + "          </div>"
+ + "        </div>"
+ + "      </div>"
  + "      <div class=\"padding_1 padding_top_0 row\">"
  + "        <router-link class=\"col-4\" :to=\"'/CrearSolucion/' + $route.params.id_problema\">"
  + "          <button class=\"width_100\">Crear solución</button>"
@@ -35,6 +55,7 @@ required:true
 data() {try {
 console.log('[DEBUG]', "PaginaDeVerProblema.data");
 return { votoPrevio:undefined,
+votosTotales:0,
 haVotadoYa:false,
 busqueda:{ filtros:JSON.stringify([ [ "id_problema",
 "=",
@@ -83,6 +104,19 @@ throw error;
 }
 
 },
+async obtenerTotalDeVotos() {try {
+const respuesta_1 = (await Castelog.metodos.una_peticion_http("/ConsultarVotos", "POST", { id_problema:parseInt( this.$route.params.id_problema )
+}, { authorization:this.root.tokenDeSesion
+}, null, error => {
+this.root.gestionarError( error );}));
+console.log(respuesta_1.data);
+this.votosTotales = respuesta_1.data.data.datos;
+} catch(error) {
+console.log(error);
+throw error;
+}
+
+},
 async obtenerVoto() {try {
 const respuesta_1 = (await Castelog.metodos.una_peticion_http("/ConsultarDatos", "POST", { tabla:"Voto",
 filtros:[ [ "id_problema",
@@ -91,7 +125,7 @@ parseInt( this.$route.params.id_problema ) ] ]
 }, { authorization:this.root.tokenDeSesion
 }, null, error => {
 this.root.gestionarError( error );}));
-if(!(respuesta_1.data.data.mensaje === "La consulta fue realizada correctamente")) throw new Error("Error en fichero [-] en posición [3486-3593=79:59-80:107] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"La consulta fue realizada correctamente\"");
+if(!(respuesta_1.data.data.mensaje === "La consulta fue realizada correctamente")) throw new Error("Error en fichero [-] en posición [4822-4929=116:59-117:107] cuando: " + "compruebo que respuesta_1.data.data.mensaje es igual que \"La consulta fue realizada correctamente\"");
 if(respuesta_1.data.data.datos.length > 0) {
 this.haVotadoYa = true;
 this.votoPrevio = respuesta_1.data.data.datos[ 0 ];
@@ -100,6 +134,7 @@ else {
 this.haVotadoYa = false;
 this.votoPrevio = undefined;
 }
+(await this.obtenerTotalDeVotos(  ));
 } catch(error) {
 console.log(error);
 throw error;
@@ -111,7 +146,13 @@ watch:{
 },
 beforeMount() {
 },
-async mounted() {
+async mounted() {try {
+(await this.obtenerVoto(  ));
+} catch(error) {
+console.log(error);
+throw error;
+}
+
 }
 };},
   null);

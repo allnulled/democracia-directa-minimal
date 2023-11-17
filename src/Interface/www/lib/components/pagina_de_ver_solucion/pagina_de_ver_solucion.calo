@@ -3,6 +3,26 @@ asigno window.PaginaDeVerSolucion como un componente vue2 con nombre "PaginaDeVe
     <WinVentana titulo="🌐 Ver solución">
       <MigasDePan :root="root" :migas="[{texto: 'Inicio',link:'/'},{texto: 'Ver soluciones',link:'/VerSoluciones'},{texto: 'Ver solución',link:false}]" />
       <VisorDeDato :root="root" tabla-prop="Solucion" :id-prop="this.$route.params.id_solucion" />
+      <div class="padding_1 padding_top_0">
+        <div class="text_align_center">
+          <div class="">
+            <table class="tabla_de_votos">
+              <tr>
+                <td class="text_align_center">
+                  <div class="etiqueta_de_votos">
+                  {{ votosTotales.negativos }} negativo{{ votosTotales.positivos === 1 ? '' : 's' }}
+                  </div>
+                </td>
+                <td class="text_align_center">
+                  <div class="etiqueta_de_votos">
+                  {{ votosTotales.positivos }} positivo{{ votosTotales.positivos === 1 ? '' : 's' }}
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
       <div class="padding_1 padding_top_0 row">
         <router-link class="col-6" :to="'/CrearImplementacion/' + $route.params.id_solucion">
           <button class="width_100">Crear implementación</button>
@@ -34,6 +54,7 @@ asigno window.PaginaDeVerSolucion como un componente vue2 con nombre "PaginaDeVe
     }.
     método data donde {
       retorno {
+        votosTotales: 0,
         votoPrevio: undefined,
         haVotadoYa: false,
         busqueda: {
@@ -59,6 +80,22 @@ asigno window.PaginaDeVerSolucion como un componente vue2 con nombre "PaginaDeVe
         hago asíncronamente this.obtenerVoto().
         hago this.$forceUpdate(true).
       }.
+      método asíncrono obtenerTotalDeVotos donde {
+        creo respuesta_1 como asíncronamente una petición http
+          con url "/ConsultarVotos"
+          con método "POST"
+          con cuerpo {
+            id_solucion: parseInt(this.$route.params.id_solucion)
+          }
+          con cabeceras {
+            authorization: this.root.tokenDeSesion
+          }
+          en errores {
+            hago this.root.gestionarError(error).
+          }.
+        imprimo respuesta_1.data.
+        asigno this.votosTotales como respuesta_1.data.data.datos.
+      }.
       método asíncrono obtenerVoto donde {
         creo respuesta_1 como asíncronamente una petición http
           con url "/ConsultarDatos"
@@ -81,10 +118,13 @@ asigno window.PaginaDeVerSolucion como un componente vue2 con nombre "PaginaDeVe
           asigno this.haVotadoYa como false.
           asigno this.votoPrevio como undefined.
         }.
+        hago asíncronamente this.obtenerTotalDeVotos().
       }.
     }.
     propiedad watch como {}.
     método beforeMount donde {}.
-    método asíncrono mounted donde {}.
+    método asíncrono mounted donde {
+      hago asíncronamente this.obtenerVoto().
+    }.
   }.
 }.

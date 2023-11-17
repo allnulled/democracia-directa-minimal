@@ -249,9 +249,17 @@ h5 a {
     margin-top: 0;
     margin-bottom: 0;
 }
-
-
-
+.etiqueta_de_votos {
+    background-color: #DDD;
+    padding: 12px;
+    white-space: nowrap;
+}
+table.tabla_de_votos {
+    width: 100%;
+}
+table.tabla_de_votos tr td {
+    width: 50%;
+}
 
 
 
@@ -355,3 +363,9 @@ h5 a {
     text-align: right;
 }
 
+.display_inline_block {
+    display: inline-block;
+}
+.display_block {
+    display: block;
+}
