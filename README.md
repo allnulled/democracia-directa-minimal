@@ -38,17 +38,19 @@ Luego puedes entrar así con Firefox, por ejemplo, desde línea de comandos:
 firefox http://127.0.0.1:5054/ui
 ```
 
+Puedes abrir el navegador e introducir la URL a mano también.
+
 ## Filosofía
 
 Este software sirve para organizar comunidades basándose en votaciones. El software contempla los siguientes pasos:
 
- - **Fase problemas:**
+ - **Fase de «Problemas»:**
    - La creación de problemas.
    - La votación de problemas (a favor, en contra o indiferente).
- - **Fase de soluciones:**
+ - **Fase de «Soluciones»:**
    - La creación de soluciones.
    - La votación de soluciones (a favor, en contra o indiferente).
- - **Fase de implementaciones:**
+ - **Fase de «Implementaciones»:**
    - La creación de implementaciones (de solución).
    - La votación de implementaciones (a favor, en contra o indiferente).
 
@@ -80,5 +82,11 @@ A continuación se listas las operaciones que este software no contempla actualm
 
   - **Crear un usuario.** No hay un mecanismo de registro público. Cada nuevo usuario debe ser introducido a la base de datos directamente. Esto asegura el hermetismo de la comunidad, así como el ahuyentar trolls que pueden fastidiarlo todo bien rápidamente (inflándolo de propuestas *fake* que ensucien los datos y ofusquen las buenas propuestas, consumiendo tiempo del resto de miembros de la comunidad en filtrar las propuestas *fake*). De habilitarse en un futuro, el registro seguiría sin estar en manos del usuario final, y en cambio sería un proceso que le correspondería al administrador.
 
+## Normas
 
-  
+A la hora de votar, hay una serie de límites:
+
+  - Solo se admiten 10 votos por cada:
+     - votación de problemas: 10 votos.
+     - votación de soluciones: 10 votos.
+     - votación de implementaciones: 10 votos.
