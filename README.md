@@ -1,4 +1,4 @@
-º democracia-directa-minimal
+# democracia-directa-minimal
 
 Software libre de organización civil por método asambleario. 
 
